@@ -19,3 +19,6 @@ $product_shuffle = $product->getData();
 
 // Cart object
 $Cart = new Cart($db );
+if(isset($_GET['search'])){
+    $product_shuffle = $product->searchProduct($_GET['search']);
+}

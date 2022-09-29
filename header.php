@@ -68,7 +68,7 @@
                     <li class="nav-item">
                         <form action="/" class="input-group">
                             <div class="form-outline">
-                                <input type="search" id="form1" class="form-control"  placeholder="search..."/>
+                                <input type="search" id="search" name="search" class="form-control"  placeholder="search..."/>
                             </div>
                             <button type="submit" class="btn btn-primary">
                                 <i class="fas fa-search"></i>
