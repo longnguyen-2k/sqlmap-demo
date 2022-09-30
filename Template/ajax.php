@@ -17,7 +17,3 @@ if (isset($_POST['itemid'])){
     echo json_encode($result);
 }
 
-if(isset($_GET['search'])){
-    $result = $product->searchProduct($_POST['search']);
-    echo json_encode($result);
-}
