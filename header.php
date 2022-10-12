@@ -22,6 +22,7 @@
     <?php
     // require functions.php file
     require('functions.php');
+    include 'database/Auth.php';
     ?>
 
 </head>
@@ -33,7 +34,35 @@
         <div class="strip d-flex justify-content-between px-4 py-1 bg-light">
             <p class="font-rale font-size-12 text-black-50 m-0">Sql map demo</p>
             <div class="font-rale font-size-14">
-                <a href="#" class="px-3 border-right border-left text-dark">Login</a>
+                <?php
+                if(isset($_COOKIE['username'])&&isset($_COOKIE['pass'])){
+                    $uname=$_COOKIE['username'] ;
+                    $pass=$_COOKIE['pass'];
+                    if (!empty($uname)&&!empty($pass)) {
+                        $db = new DBController();
+                        if ((new Auth($db))->login($uname,$pass)) {
+                            echo "<a href='#' class='px-3 border-right border-left text-dark'>$uname</a>";
+                            echo "<a href='logout.php' class='px-3 border-right border-left text-dark'>Logout</a>";
+                        }else {
+                            setcookie('username', '', time() + (86400 * 30), "/");
+                            setcookie('pass', '', time() + (86400 * 30), "/");
+                            echo '<a href="login.php" class="px-3 border-right border-left text-dark">Login</a>';
+                        }
+                }
+                else {
+                    setcookie('username', '', time() + (86400 * 30), "/");
+                    setcookie('pass','', time() + (86400 * 30), "/");
+                    echo '<a href="login.php" class="px-3 border-right border-left text-dark">Login</a>';
+                }
+                }
+                else{
+                    setcookie('username', '', time() + (86400 * 30), "/");
+                    setcookie('pass','', time() + (86400 * 30), "/");
+                    echo '<a href="login.php" class="px-3 border-right border-left text-dark">Login</a>';
+                }
+
+                
+                ?>
             </div>
         </div>
 
