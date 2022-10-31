@@ -41,7 +41,8 @@
                     if (!empty($uname)&&!empty($pass)) {
                         $db = new DBController();
                         if ((new Auth($db))->login($uname,$pass)) {
-                            echo "<a href='#' class='px-3 border-right border-left text-dark'>$uname</a>";
+                            $username=$_SESSION['username'];
+                            echo "<a href='#' class='px-3 border-right border-left text-dark'>$username</a>";
                             echo "<a href='logout.php' class='px-3 border-right border-left text-dark'>Logout</a>";
                         }else {
                             setcookie('username', '', time() + (86400 * 30), "/");
