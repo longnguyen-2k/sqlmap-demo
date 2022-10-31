@@ -12,13 +12,15 @@ class Auth
 
     public  function login($username,$password){
         $sql = "SELECT * FROM users WHERE user_name='$username' AND password='$password'";
+        error_log($sql);
         $result = mysqli_query($this->db->con, $sql);  
-        $_SESSION['valid'] = true;
-        $_SESSION['timeout'] = time();
-        $_SESSION['username'] = $username;
         if(mysqli_num_rows($result) === 1) {
             $row = mysqli_fetch_assoc($result);
-            return ($row['user_name'] === $username && $row['password'] === $password)?true:false;    
+            error_log(json_encode($row));
+            $_SESSION['valid'] = true;
+            $_SESSION['timeout'] = time();
+            $_SESSION['username'] = $row['user_name'];
+            return true;    
         }
         return false;
     }
